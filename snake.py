@@ -17,7 +17,7 @@ gameWindow = pygame.display.set_mode((screen_width,screen_height))
 
 
 #Titulo del juego
-pygame.display.set_caption('Good old sanke game')
+pygame.display.set_caption('Good old snake game')
 pygame.display.update()
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 55)
@@ -45,7 +45,7 @@ def gameLoop():
     food_y = random.randint(60, screen_height-20)
     score = 0
     ini_velocity = 4
-    snake_size = 30
+    snake_size = 20
     fps = 60 
 
     while not exit_game:
@@ -95,7 +95,7 @@ def gameLoop():
 
             gameWindow.fill(black)
             text_screen("Score: " + str(score * 10), white, 5, 5)
-            pygame.draw.rect(gameWindow, white, [food_x, food_y, snake_size, snake_size])
+            pygame.draw.rect(gameWindow, white, [food_x, food_y, snake_size*0.5, snake_size*0.5])
             pygame.draw.line(gameWindow, white, (0,40), (900,40),5)
 
             head = []
@@ -107,10 +107,10 @@ def gameLoop():
                 del snk_list[0]
 
             if head in snk_list[:-1]:
-                game_over = True
+                gameover = True
 
             if snake_x<0 or snake_x>screen_width-20 or snake_y<50 or snake_y>screen_height-20:
-                game_over = True
+                gameover = True
             plot_snake(gameWindow, green, snk_list, snake_size)
         pygame.display.update()
         clock.tick(fps)
